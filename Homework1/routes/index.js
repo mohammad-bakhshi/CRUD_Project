@@ -48,6 +48,7 @@ router.post("/register/save", (req, res) => {
     password: req.body.password,
   });
 
+
   user.save(function (err, user) {
     if (err)
       return res.status(500).send("Somthing went wrong in add user \n!" + err);
