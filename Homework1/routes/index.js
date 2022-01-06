@@ -3,24 +3,12 @@ const url = require("url");
 const User = require("../models/user");
 const router = express.Router();
 
+//render login page in / route
 router.get("/", (req, res) => {
   res.render("login");
 });
 
-router.get("/register", (req, res) => {
-  res.render("register");
-});
-
-router.post("/register/username", (req, res) => {
-  User.findOne({ userName: req.body.usernameValue }).then((user) => {
-    if (user === null) {
-      res.json({ message: "pass" });
-    } else {
-      res.json({ message: "fail" });
-    }
-  });
-});
-
+//allow user to login and redirect to porfile page
 router.post("/login", (req, res) => {
   const user = {
     userName: req.body.username,
@@ -32,33 +20,45 @@ router.post("/login", (req, res) => {
       res.send("error");
     } else if (document.password === user.password) {
       let query = encodeURIComponent(document.userName);
-      res.redirect("/dashboard?username=" + query);
+      res.redirect("/profile?username=" + query);
     } else {
       res.send("error");
     }
   });
 });
 
-router.post("/register/save", (req, res) => {
-  const user = new User({
-    firstName: req.body.fname,
-    lastName: req.body.lname,
-    gender: req.body.gender,
-    userName: req.body.username,
-    password: req.body.password,
-  });
+//render signup page in /signup router
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
 
+//add user to the database
+router.post("/signup/add", (req, res) => {
+  let username = req.body.username;
 
-  user.save(function (err, user) {
-    if (err)
-      return res.status(500).send("Somthing went wrong in add user \n!" + err);
-    return res.redirect("/");
+  User.findOne({ userName: username }).then((doc) => {
+    if (doc === null) {
+      const user = new User({
+        firstName: req.body.fname,
+        lastName: req.body.lname,
+        gender: req.body.gender,
+        userName: req.body.username,
+        password: req.body.password,
+      });
+
+      user.save(function (err, user) {
+        if (err) return res.status(500).send("Somthing went wrong \n!" + err);
+        return res.redirect("/");
+      });
+    } else {
+      res.send('error')
+    }
   });
 });
 
-router.get("/dashboard", (req, res) => {
+router.get("/profile", (req, res) => {
   User.findOne({ userName: req.query.username }).then((document) => {
-    res.render("dashboard", document);
+    res.render("profile", document);
   });
 });
 
@@ -69,14 +69,13 @@ router.post("/delete", (req, res) => {
 });
 
 router.post("/update", (req, res) => {
- 
   User.findOne({ userName: req.body.oldUsername }).then((doc) => {
     doc.firstName = req.body.userfname;
     doc.lastName = req.body.userlname;
     doc.userName = req.body.userusername;
     doc.password = req.body.userpassword;
     doc.save();
-    res.render('dashboard',doc);
+    res.render("profile", doc);
   });
 });
 

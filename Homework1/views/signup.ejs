@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <title>Signup</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles/style.css" />
 </head>
@@ -13,8 +13,21 @@
 <body>
   <div class="container">
     <div class="header">
-      <h2>Login</h2>
-      <form class="form" id="form" action="/login" method="POST">
+      <h2>Create Account</h2>
+      <form class="form" id="form" action="/signup/add" method="post">
+        <div class="form-control">
+          <label for="fname">Firstname</label>
+          <input type="text" id="fname" name="fname" required minlength="2" maxlength="30" />
+        </div>
+        <div class="form-control">
+          <label for="lname">Lastname</label>
+          <input type="text" id="lname" name="lname" required minlength="2" maxlength="30" />
+        </div>
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="M" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="F" />
+        <label for="female">Female</label><br><br><br>
         <div class="form-control">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" minlength="2" required />
@@ -24,13 +37,14 @@
           <input type="password" id="password" name="password" required
             pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$" />
         </div>
-        <button>Login</button>
+        <button>Submit</button>
       </form>
-      <p>Don't have an account? <a href="/signup">Signup</a></p>
+      <p>Have an account? <a href="/">Login</a></p>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="scripts/signup.js"></script>
 </body>
 
 </html>
