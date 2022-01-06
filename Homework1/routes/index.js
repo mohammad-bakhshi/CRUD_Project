@@ -56,18 +56,24 @@ router.post("/signup/add", (req, res) => {
   });
 });
 
+
+//render profile page in /profile route
 router.get("/profile", (req, res) => {
   User.findOne({ userName: req.query.username }).then((document) => {
     res.render("profile", document);
   });
 });
 
+
+//delete user from database
 router.post("/delete", (req, res) => {
   User.findOneAndRemove({ userName: req.body.username }).then(() => {
-    res.redirect("/");
+    res.json({message:'deleted'});
   });
 });
 
+
+//update user information in database
 router.post("/update", (req, res) => {
   User.findOne({ userName: req.body.oldUsername }).then((doc) => {
     doc.firstName = req.body.userfname;

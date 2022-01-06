@@ -82,29 +82,29 @@
                         <div class="mb-3">
                           <label for="userfname" class="col-form-label">Firstname:</label>
                           <input type="text" class="form-control" id="userfname" name="userfname"
-                            value="<%= firstName %>" />
+                            value="<%= firstName %>" required minlength="2" maxlength="30" />
                         </div>
                         <div class="mb-3">
                           <label for="userlname" class="col-form-label">Lastname:</label>
                           <input type="text" class="form-control" id="userlname" name="userlname"
-                            value="<%= lastName %>" />
+                            value="<%= lastName %>" required minlength="2" maxlength="30" />
                         </div>
                         <div class="mb-3">
                           <label for="oldUsername" class="col-form-label">Old Username:</label>
                           <input type="text" class="form-control" id="oldUsername" name="oldUsername"
-                            value="<%= userName %>" />
+                            value="<%= userName %>" minlength="2" required />
                         </div>
                         <div class="mb-3">
                           <label for="userusername" class="col-form-label">Username:</label>
                           <input type="text" class="form-control" id="userusername" name="userusername"
-                            value="<%= userName %>" />
+                            value="<%= userName %>" minlength="2" required />
                         </div>
                         <div class="mb-3">
                           <label for="userpassword" class="col-form-label">Password:</label>
                           <input type="text" class="form-control" id="userpassword" name="userpassword"
-                            value="<%= password %>" />
+                            value="<%= password %>" required pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$" />
                         </div>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="update">
+                        <button type="submit" class="btn btn-primary"  id="update">
                           Update
                         </button>
                         <button type="button" class="btn btn-danger" id="delete">
@@ -131,7 +131,7 @@
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="scripts/profileScript.js"></script>
+  <script src="scripts/profile.js"></script>
 </body>
 
 </html>
