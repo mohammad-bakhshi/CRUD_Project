@@ -1,0 +1,1 @@
+SELECT * FROM exam INNER JOIN users ON  exam.User_user_id=users.user_id;

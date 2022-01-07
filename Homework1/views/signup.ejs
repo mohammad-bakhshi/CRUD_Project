@@ -2,26 +2,32 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signup</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/style.css" />
+  <%-include('head') %>
+    <title>
+      <%= title %>
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css" />
 </head>
 
 <body>
   <div class="container">
     <div class="header">
       <h2>Create Account</h2>
-      <form class="form" id="form" action="/signup/add" method="post">
+      <form class="form" id="form">
         <div class="form-control">
           <label for="fname">Firstname</label>
-          <input type="text" id="fname" name="fname" required minlength="2" maxlength="30" />
+          <input type="text" id="fname" name="fname" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <div class="form-control">
           <label for="lname">Lastname</label>
-          <input type="text" id="lname" name="lname" required minlength="2" maxlength="30" />
+          <input type="text" id="lname" name="lname" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <label>Gender:</label>
         <input type="radio" id="male" name="gender" value="M" />
@@ -30,12 +36,17 @@
         <label for="female">Female</label><br><br><br>
         <div class="form-control">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" minlength="2" required />
+          <input type="text" id="username" name="username" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <div class="form-control">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required
-            pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$" />
+          <input type="password" id="password" name="password" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <button>Submit</button>
       </form>

@@ -5,7 +5,7 @@ const router = express.Router();
 
 //render login page in / route
 router.get("/", (req, res) => {
-  res.render("login");
+  res.render("login",{title:'login'});
 });
 
 //allow user to login and redirect to porfile page
@@ -29,7 +29,7 @@ router.post("/login", (req, res) => {
 
 //render signup page in /signup router
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", { title: "signup" });
 });
 
 //add user to the database
@@ -45,17 +45,14 @@ router.post("/signup/add", (req, res) => {
         userName: req.body.username,
         password: req.body.password,
       });
-
       user.save(function (err, user) {
-        if (err) return res.status(500).send("Somthing went wrong \n!" + err);
-        return res.redirect("/");
+        res.json({ message: 'pass' });
       });
     } else {
-      res.send('error')
+      res.json({ message: 'fail' });
     }
   });
 });
-
 
 //render profile page in /profile route
 router.get("/profile", (req, res) => {
@@ -64,14 +61,12 @@ router.get("/profile", (req, res) => {
   });
 });
 
-
 //delete user from database
 router.post("/delete", (req, res) => {
   User.findOneAndRemove({ userName: req.body.username }).then(() => {
-    res.json({message:'deleted'});
+    res.json({ message: "deleted" });
   });
 });
-
 
 //update user information in database
 router.post("/update", (req, res) => {
