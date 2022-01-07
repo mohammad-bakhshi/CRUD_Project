@@ -5,7 +5,7 @@ const router = express.Router();
 
 //render login page in / route
 router.get("/", (req, res) => {
-  res.render("login",{title:'login'});
+  res.render("login", { title: 'login' });
 });
 
 //allow user to login and redirect to porfile page
@@ -17,12 +17,12 @@ router.post("/login", (req, res) => {
 
   User.findOne({ userName: user.userName }).then((document) => {
     if (document === null) {
-      res.send("error");
+      res.json({ result: 'fail', message: 'Username does not exists' });
     } else if (document.password === user.password) {
       let query = encodeURIComponent(document.userName);
       res.redirect("/profile?username=" + query);
     } else {
-      res.send("error");
+      res.json({ result: 'fail', message: 'Password is not coorect' });
     }
   });
 });
@@ -32,10 +32,9 @@ router.get("/signup", (req, res) => {
   res.render("signup", { title: "signup" });
 });
 
-//add user to the database
+//add user to the database form signup page
 router.post("/signup/add", (req, res) => {
   let username = req.body.username;
-
   User.findOne({ userName: username }).then((doc) => {
     if (doc === null) {
       const user = new User({
@@ -46,10 +45,10 @@ router.post("/signup/add", (req, res) => {
         password: req.body.password,
       });
       user.save(function (err, user) {
-        res.json({ message: 'pass' });
+        res.json({ result: 'pass' });
       });
     } else {
-      res.json({ message: 'fail' });
+      res.json({ result: 'fail', message: 'something went wrong' });
     }
   });
 });

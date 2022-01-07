@@ -3,24 +3,32 @@
 
 <head>
   <%-include('head') %>
-  <title><%= title  %> </title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/style.css" />
+    <title>
+      <%= title %>
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css" />
 </head>
 
 <body>
   <div class="container">
     <div class="header">
       <h2>Login</h2>
-      <form class="form" id="form" action="/login" method="POST">
+      <form class="form" id="form" action="/login" method="post">
         <div class="form-control">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" minlength="2" required />
+          <input type="text" id="username" name="username" required minlength="2" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <div class="form-control">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required
-            pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$" />
+          pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
         </div>
         <button>Login</button>
       </form>
@@ -29,6 +37,7 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="/scripts/login.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ form.addEventListener("submit", (e) => {
             data: result,
             dataType: "json",
             success: function (response) {
-                if (response.message === 'pass') {
+                if (response.result === 'pass') {
                     window.location.replace("/");
                 }
                 else {
@@ -47,6 +47,10 @@ function checkInputs() {
     if (usernameValue === "") {
         setErrorFor(username, "Username cannot be blank");
         usernameResult = false;
+    }
+    else if (usernameValue.length < 2) {
+        setErrorFor(username, "At least two characters");
+        usernameResult = false;
     } else {
         setSuccessFor(username);
         usernameResult = true;
@@ -66,6 +70,9 @@ function checkInputs() {
     if (fnameValue === "") {
         setErrorFor(fname, "Firstname cannot be blank");
         fnameResult = false;
+    } else if (fnameValue < 2 || fnameValue > 30) {
+        setErrorFor(fname, "Firstname must be between 2 and 30 characters");
+        fnameResult = false;
     } else {
         setSuccessFor(fname);
         fnameResult = true;
@@ -73,6 +80,9 @@ function checkInputs() {
 
     if (lnameValue === "") {
         setErrorFor(lname, "Lastname cannot be blank");
+        lnameResult = false;
+    } else if (lnameValue < 2 || lnameValue > 30) {
+        setErrorFor(fname, "Lastname must be between 2 and 30 characters");
         lnameResult = false;
     } else {
         setSuccessFor(lname);
